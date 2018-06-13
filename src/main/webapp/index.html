@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>CodeShare</title>
+</head>
+<body data-ng-app="app">
+
+<div ui-view="navbar"></div>
+
+<div ui-view="content"></div>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- AngularUI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+<!-- Google Maps API -->
+<!-- Hidden in public repository. -->
+
+<!-- Toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+    toastr.options.timeOut = "2500";
+    toastr.options.positionClass = "toast-top-center";
+</script>
+
+<!-- My app -->
+<script src="app.js"></script>
+
+<script src="auth/authStates.js"></script>
+<script src="auth/authService.js"></script>
+<script src="auth/signin/signinController.js"></script>
+<script src="auth/signup/signupController.js"></script>
+
+<script src="languages/languageStates.js"></script>
+<script src="languages/languageService.js"></script>
+<script src="languages/languageListController.js"></script>
+
+<script src="navbar/navbarController.js"></script>
+
+<script src="snippets/snippetStates.js"></script>
+<script src="snippets/snippetService.js"></script>
+<script src="snippets/commentService.js"></script>
+<script src="snippets/newSnippet/newSnippetController.js"></script>
+<script src="snippets/snippetDetails/snippetDetailsController.js"></script>
+<script src="snippets/snippetList/snippetListController.js"></script>
+
+<script src="users/userStates.js"></script>
+<script src="users/userService.js"></script>
+<script src="users/userDetails/userDetailsController.js"></script>
+<script src="users/userList/userListController.js"></script>
+
+</body>
+</html>

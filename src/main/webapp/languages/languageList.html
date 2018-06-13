@@ -1,0 +1,13 @@
+<div class="container">
+    <form class="main-content content-medium">
+        <h2 class="form-auth-heading">Programming languages</h2>
+
+        <input type="text" class="form-control" placeholder="Language name" autofocus ng-model="language.languageName">
+
+        <button class="btn btn-lg btn-primary btn-block" ng-click="createLanguage()">Add</button>
+
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="language in languages">{{language.languageName}}</li>
+        </ul>
+    </form>
+</div>

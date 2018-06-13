@@ -1,0 +1,30 @@
+<div class="container">
+    <form name="newSnippetForm" class="main-content content-large">
+        <h2 class="form-auth-heading">New Snippet</h2>
+
+        <input type="text" class="form-control" placeholder="Description" required autofocus
+               ng-model="snippet.description">
+
+        <input type="text" class="form-control" placeholder="Repository URL" ng-model="snippet.repositoryUrl">
+
+        <textarea class="form-control" placeholder="Code goes here..." rows="10" required maxlength="1000"
+                  ng-model="snippet.codeSnippet"></textarea>
+
+        <div class="row">
+            <div class="col-md-6">
+                <select class="form-control" ng-init="getLanguages()" ng-model="snippet.language"
+                        ng-options="language.languageName for language in languages">
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <input type="number" class="form-control" min="0" placeholder="Duration (hours)"
+                       ng-model="durationHours">
+            </div>
+        </div>
+
+        <button ng-disabled="newSnippetForm.$invalid" class="btn btn-lg btn-primary btn-block"
+                ng-click="createSnippet()">Create
+        </button>
+    </form>
+</div>

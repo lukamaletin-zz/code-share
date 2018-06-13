@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="main-content content-medium">
+        <h2 class="inline-left"> {{user.username}} </h2>
+
+        <div ng-if="USER != null && USER.role == 'ADMIN' && user.role != 'ADMIN'" class="inline-right">
+            <button ng-if="!user.banned" class="btn btn-danger" ng-click="setBanned(true)">Ban</button>
+            <button ng-if="user.banned" class="btn btn-danger" ng-click="setBanned(false)">Unban</button>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img class="thumbnail" ng-src="{{user.photoUrl}}" alt="avatar">
+                        <label ng-if="USER != null && USER.id == user.id" class="btn btn-default btn-file">
+                            Change photo
+                            <input type="file" onchange="angular.element(this).scope().uploadPhoto(this.files)"/>
+                        </label>
+
+                        <div class="row">
+                            <div class="col-md-6 user-labels">
+                                <p>First name</p>
+                                <p>Last name</p>
+                                <p>Phone number</p>
+                                <p>Email</p>
+                                <p> Address</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.firstName || ""}}</p>
+                                <p>{{user.lastName || ""}}</p>
+                                <p>{{user.phoneNumber || ""}} </p>
+                                <p>{{user.email || ""}}</p>
+                                <p>{{user.address || ""}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div id="map"></div>
+                    </div>
+                </div>
+
+                <div ng-if="snippets.length > 0">
+                    Snippets:
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="snippet in snippets">
+                            <a ui-sref="snippet({id: snippet.id})">{{snippet.description}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

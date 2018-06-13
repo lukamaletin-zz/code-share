@@ -1,0 +1,44 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">CodeShare</div>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Snippets <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-if="USER == null || !USER.banned"><a ui-sref="newSnippet">New snippet</a></li>
+                        <li><a ui-sref="snippets">All snippets</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Users <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-if="USER != null"><a ui-sref="user({id: USER.id})">My profile</a></li>
+                        <li><a ui-sref="users">All users</a></li>
+                    </ul>
+                </li>
+
+                <li ng-if="USER != null && USER.role == 'ADMIN'"><a ui-sref="languages">Languages</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="USER == null"><a ui-sref="signup">Sign up</a></li>
+                <li ng-if="USER == null"><a ui-sref="signin">Sign in</a></li>
+                <li ng-if="USER != null"><a ng-click="signout()" class="">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

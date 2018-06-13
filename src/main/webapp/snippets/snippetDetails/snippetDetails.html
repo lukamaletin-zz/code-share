@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="main-content content-large">
+        <h2 class="inline-left"> {{snippet.description}} </h2>
+
+        <div ng-if="USER != null && USER.role == 'ADMIN'" class="inline-right">
+            <button ng-if="!snippet.banned" class="btn btn-danger" ng-click="setBanned(true)">Ban</button>
+            <button ng-if="snippet.banned" class="btn btn-danger" ng-click="setBanned(false)">Unban</button>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a href="{{snippet.repositoryUrl}}" target="_blank"
+                       class="inline-left">{{snippet.repositoryUrl}}</a>
+
+                    <div class="inline-right">
+                        <div>
+                            at {{snippet.date | date : 'HH:mm MMM d, yyyy'}}
+                        </div>
+
+                        <div ng-if="snippet.user != null">
+                            by <a ui-sref="user({id: snippet.user.id})">{{snippet.user.username}}</a>&nbsp
+                        </div>
+
+                        <div ng-if="snippet.language.languageName != 'Undefined'">
+                            {{snippet.language.languageName}} snippet&nbsp
+                        </div>
+                    </div>
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="panel-body">
+                <pre>{{snippet.codeSnippet}}</pre>
+
+                <div class="row" id="comments-header">
+                    <div class="col-md-11">
+                        Comments:
+                    </div>
+                    <div class="col-md-1">
+                        <select ng-model="commentsOrder">
+                            <option selected="selected" value="upVotes">Top</option>
+                            <option value="date">New</option>
+                        </select>
+                    </div>
+                </div>
+
+                <ul class="list-group">
+                    <li class="list-group-item comment-content"
+                        ng-repeat="comment in snippet.comments | orderBy:commentsOrder:true">
+                        <div class="row">
+                            <div class="col-md-1 text-center">
+                                <img class="thumbnail" ng-src="{{comment.user.photoUrl || '/images/user_thumb.png'}}"
+                                     alt="avatar">
+
+                                <div ng-if="comment.user != null">
+                                    <a ui-sref="user({id: comment.user.id})">{{comment.user.username}}</a>
+                                </div>
+                                <div ng-if="comment.user == null">
+                                    Guest
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 comment-text">
+                                {{comment.text}}
+                            </div>
+
+                            <div class="col-md-2 text-center">
+                                {{comment.date | date : 'HH:mm MMM d, yyyy'}}<br>
+                                &nbsp;{{comment.upVotes}}
+                                <button class="btn-rating" ng-class="{'btn-comment-rated': commentRated(comment, true)}"
+                                        ng-click="rateComment(comment, true)"
+                                        ng-disabled="rateCommentDisabled(comment)">
+                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                </button>
+                                <br>
+                                {{comment.downVotes}}
+                                <button class="btn-rating"
+                                        ng-class="{'btn-comment-rated': commentRated(comment, false)}"
+                                        ng-click="rateComment(comment, false)"
+                                        ng-disabled="rateCommentDisabled(comment)">
+                                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                </button>
+                                <div ng-if="USER != null && (USER.role == 'ADMIN' || USER.id == comment.user.id)"
+                                     id="comment-trash">
+                                    <i class="glyphicon glyphicon-trash" ng-click="removeComment(snippet, comment)"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li ng-if="!snippet.banned && (USER == null || !USER.banned)" class="list-group-item">
+                        <form name="newCommentForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Type here..." required autofocus
+                                       maxlength="500" ng-model="comment.text">
+                                <span class="input-group-btn">
+                                <button ng-disabled="newCommentForm.$invalid" class="btn btn-primary"
+                                        ng-click="addComment()">Add comment</button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

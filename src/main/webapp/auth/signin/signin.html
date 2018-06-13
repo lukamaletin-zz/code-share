@@ -1,0 +1,13 @@
+<div class="container">
+    <form name="signInForm" class="main-content content-small">
+        <h2 class="form-auth-heading">Please sign in</h2>
+
+        <input type="text" class="form-control" placeholder="Username" required autofocus ng-model="user.username">
+
+        <input type="password" class="form-control" placeholder="Password" required ng-model="user.password">
+
+        <button ng-disabled="signInForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="signin()">
+            Sign in
+        </button>
+    </form>
+</div>

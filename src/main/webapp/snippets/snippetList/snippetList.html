@@ -1,0 +1,41 @@
+<div class="container">
+    <form class="main-content content-medium">
+        <h2 class="form-auth-heading">Search snippets</h2>
+
+        <input type="text" class="form-control" placeholder="Description" autofocus ng-model="filter.description">
+
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control" ng-model="filter.language">
+                    <option selected value="">Select language</option>
+                    <option ng-repeat="language in languages" ng-value="language.languageName">
+                        {{language.languageName}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <input type="date" class="form-control" ng-model="filter.startDate">
+            </div>
+
+            <div class="col-md-4">
+                <input type="date" class="form-control" ng-model="filter.endDate">
+            </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" ng-click="searchSnippets()">Search</button>
+
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="snippet in snippets">
+                <div class="row">
+                    <div class="col-md-11">
+                        <a ui-sref="snippet({id: snippet.id})">{{snippet.description}}</a>
+                    </div>
+                    <div ng-if="USER != null && (USER.role == 'ADMIN' || USER.id == snippet.user.id)" class="col-md-1">
+                        <i class="glyphicon glyphicon-trash" ng-click="removeSnippet(snippet)"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
